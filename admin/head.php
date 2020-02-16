@@ -1,19 +1,20 @@
-<?php  
+<?php
 session_start();
-	if ($_SESSION['username'] == null || $_SESSION['password'] == null) {
-		echo "<meta http-equiv='refresh' content='0;url=../index.php'>";
-		exit;
-	}
-	include "../inc/koneksi.php";
-	include "../config/authentication_users.php";
-	include "../config/fungsi_indotgl.php";
-	include "../config/library.php";
-	include "../inc/library.php";
-	$tanggal = tgl_indo(date("Y m d"));
-	$jam	 = date("H:i:s");
+if ($_SESSION['username'] == null || $_SESSION['password'] == null) {
+	echo "<meta http-equiv='refresh' content='0;url=../index.php'>";
+	exit;
+}
+include "../inc/koneksi.php";
+include "../config/authentication_users.php";
+include "../config/fungsi_indotgl.php";
+include "../config/library.php";
+include "../inc/library.php";
+$tanggal = tgl_indo(date("Y m d"));
+$jam	 = date("H:i:s");
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
 <head>
 
 	<title>Penerimaan Zakat Mahasiswa SAW</title>
@@ -74,16 +75,16 @@ session_start();
 <!-- Body -->
 
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">               
-            <a class="navbar-brand" href="index.php">Penerimaan Zakat | SPK</a>             
-            </div>
-            <div class="navbar-right">               
-            <a class="navbar-brand" href="logout.php"><i class="fa fa-sign-out"></i> Sign out</a>
-            </div>            
-        </div>
-    </div>
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="index.php">Penerimaan Zakat | SPK</a>
+			</div>
+			<div class="navbar-right">
+				<a class="navbar-brand" href="logout.php"><i class="fa fa-sign-out"></i> Sign out</a>
+			</div>
+		</div>
+	</div>
 
 	<div id="page" align="center">
 		<div id="header">

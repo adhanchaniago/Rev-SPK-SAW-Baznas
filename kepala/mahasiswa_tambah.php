@@ -23,7 +23,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label text-right">Id Calon Beasiswa:</label>
                             <div class="col-sm-10">
-                                <input type="text" name="id_mhs" class="form-control" value="<?php echo kdauto('calonbeasiswa','CPB-'); ?>" readonly="true" required>
+                                <input type="text" name="nik_mhs" class="form-control" value="<?php echo kdauto('calonbeasiswa','CPB-'); ?>" readonly="true" required>
                             </div>
                         </div>
                         
@@ -51,12 +51,12 @@
             </form>
 <?php
 if(isset($_POST['simpan'])){
-	$id_mhs	= $_POST['id_mhs'];
+	$nik_mhs	= $_POST['nik_mhs'];
 	$nama_mhs	= $_POST['nama_mhs'];
 	$jurusan		= $_POST['jurusan'];
 	
 	$sql="insert into calonbeasiswa values
-	('$id_mhs','$nama_mhs','$jurusan')";
+	('$nik_mhs','$nama_mhs','$jurusan')";
 	$query= mysql_query($sql) or die(mysql_error());
 	if($query) {
 	echo "<script>window.alert('Calon Beasiswa berhasil ditambah');

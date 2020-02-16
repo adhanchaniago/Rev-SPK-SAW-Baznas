@@ -10,9 +10,8 @@ while ($ketik = mysql_fetch_array($query)) {
 	$json[] = array(
 		'label' => $ketik['nama_mhs'], // text sugesti sat user mengetik di input box
 		'value' => $ketik['nama_mhs'], // nilai yang akan di masukan di inputbox saat user memilih salah satu sugesti
-		'id_mhs' => $ketik['id_mhs']
+		'nik_mhs' => $ketik['nik_mhs']
 		);
 }
 header("Content-Type: text/json");
 echo json_encode($json);
-?>

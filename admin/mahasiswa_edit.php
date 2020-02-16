@@ -18,8 +18,8 @@ include "head.php";
 			</div>
 			<!-- /page title -->
 <?php
-$id_mhs = $_GET['id_mhs'];
-$query = mysql_query("select * from calonbeasiswa where id_mhs='$id_mhs'");
+$nik_mhs = $_GET['nik_mhs'];
+$query = mysql_query("select * from calonbeasiswa where nik_mhs='$nik_mhs'");
 $dataku = mysql_fetch_array($query);
 ?>
 			<!-- Right labels -->
@@ -31,7 +31,7 @@ $dataku = mysql_fetch_array($query);
 						<div class="form-group">
 							<label class="col-sm-2 control-label text-right">NIK:</label>
 							<div class="col-sm-10">
-								<input type="text" name="id_mhs" value="<?php echo $dataku['id_mhs']; ?>" class="form-control" required>
+								<input type="text" name="nik_mhs" value="<?php echo $dataku['nik_mhs']; ?>" class="form-control" required>
 							</div>
 						</div>
 
@@ -102,7 +102,7 @@ $dataku = mysql_fetch_array($query);
 			</form>
 <?php
 if (isset($_POST['ubah'])) {
-	$id_mhs = $_POST['id_mhs'];
+	$nik_mhs = $_POST['nik_mhs'];
 	$tempat_lahir	= $_POST['tempat_lahir'];
 	$tanggal_lahir	= $_POST['tanggal_lahir'];
 	$nama_mhs = $_POST['nama_mhs'];
@@ -113,7 +113,7 @@ if (isset($_POST['ubah'])) {
 	$kecamatan = $_POST['kecamatan'];
 	
 
-	$query=mysql_query("UPDATE calonbeasiswa SET nama_mhs='$nama_mhs', jenis_kelamin='$jenis_kelamin', tempat_lahir='$tempat_lahir', tanggal_lahir='$tanggal_lahir',perguruan_tinggi='$perguruan_tinggi',alamat='$alamat',nagari='$nagari',kecamatan='$kecamatan' WHERE id_mhs='$id_mhs'") or die(mysql_error());
+	$query=mysql_query("UPDATE calonbeasiswa SET nama_mhs='$nama_mhs', jenis_kelamin='$jenis_kelamin', tempat_lahir='$tempat_lahir', tanggal_lahir='$tanggal_lahir',perguruan_tinggi='$perguruan_tinggi',alamat='$alamat',nagari='$nagari',kecamatan='$kecamatan' WHERE nik_mhs='$nik_mhs'") or die(mysql_error());
 	if ($query) {
 		echo "<script>window.alert('Calon Penerima Beasiswa berhasil diubah');
 				window.location=(href='mahasiswa.php')</script>";

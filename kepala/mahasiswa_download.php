@@ -1,103 +1,119 @@
 <?php
-// sesuai kan root file mPDF anda
-$nama_dokumen='Laporan Data'; //Beri nama file PDF hasil.
-define('_MPDF_PATH','../config/config/MPDF60/'); //sesuaikan dengan root folder anda
-include(_MPDF_PATH . "mpdf.php"); //includekan ke file mpdf
-$mpdf=new mPDF('utf-8', 'A4'); // Create new mPDF Document
-//Beginning Buffer to save PHP variables and HTML tags
-ob_start();
-
-//Tuliskan file HTML di bawah sini , sesuai File anda .
+include '../config/config/koneksi.php';
 ?>
-<!--sekarang Tinggal Codeing seperti biasanya. HTML, CSS, PHP tidak
-masalah.-->
-<?php
+<!DOCTYPE html>
 
-// Koneksi ke database //
-
-error_reporting(0);
-include "../config/config/koneksi.php";
-include "../config/config/fungsi_indotgl.php";
-
- 
-?>
-
-<!--CONTOH Code START-->
-<table border='0' align='LEFT'>
-<tr>
-<th>
-<img src="../images/baznas.png"  align="left" style="width:200px;height:200px;" >
-</th>
-<th width="20">
-</th>
-<th width="900px" align="left">
-<h2> <left> BADAN AMIL ZAKAT NASIONAL<br />
-LAPORAN DATA MAHASISWA<br> </left>
-
-</th>
-</tr>
-</table>
-<hr style="height:8px;" />
-
-<br>
-<h3 style="text-align:center;"> Laporan Mahasiswa </h3>
+<head>
+  <title>Laporan Mahasiswa</title>
+  <style>
+    html,
+    body {
+      background: #eee;
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+    }
 
 
-<table width="736" border="1" cellpadding="5" cellspacing="0">
-              <tbody>
-				  <thead>
-                        <tr>
-                        <th>No.</th><th>Kode Mahasiswa</th><th>Nama Mahasiswa</th><th>Jurusan Mahasiswa</th>
-                      </tr>
-                       </thead>
-				  <tbody>
-                     <?php
-                    $tampil=mysql_query("SELECT * FROM calonbeasiswa ");
-                    $no = 1;
-                      while ($r=mysql_fetch_array($tampil)){
+    .container {
+      width: 1200px;
+      margin: 25px auto;
+      /* padding-left: 100px; */
+    }
 
-                         
-                    ?>
-                        <tr>
-                         <td><?= $no ?></td>
-									<td><?= $r['id_mhs'] ?></td>
-                        <td><?= $r['nama_mhs'] ?></td>
-							<td><?= $r['jurusan'] ?></td>
-                      
-                        </tr>
+    /*design table 1*/
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-family: sans-serif;
+      color: #232323;
+      border-collapse: collapse;
+    }
 
-                    <?php
-                    $no++;
-                    }
-                    ?>
+    table,
+    th,
+    td {
+      border: 1px solid black;
 
-							</tbody>
-                        </tbody>
+      border: 1px solid #999;
+      padding: 8px 20px;
+    }
 
-                            <tfoot>
-                              <tr>
-                                <td colspan="4" class="text-left">
-                                        Pasaman Barat, <?= date("d-m-Y") ?>
-                                        <br><br><br><br>
-                                        <u>________________________________<strong></u><br>
-                                        NIP._________________
-									             </td>
-								</tr>
-							</tfoot>
-                    
-                      </table>
-                      
+    .contoh-link:hover {
+      background: #16A085;
+    }
+  </style>
+</head>
 
+<body>
+  <div class="container">
+    <center>
+      <h1>BADAN AMIL ZAKAT NASIONAL</h1>
+      <h5>Lingkuang Aua, Pasaman, Kabupaten Pasaman Barat, Sumatera Barat 26566</h5>
+      <h5>No Tlp. : 0852-7121-1216</h5>
+      <hr style="display: block; height: 1px;border: 0; border-top: 1px solid #ccc;margin: 1em 0; padding: 0;">
+    </center>
 
+    <br>
+    <h3 align="center"><u>LAPORAN DATA MAHASISWA</u></h3>
+    <br>
+    <br>
+    <table>
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nik Mahasiswa</th>
+          <th>Nama Mahasiswa</th>
+          <th>Jenis Kelamin</th>
+          <th>Tmp/Tgl Lahir</th>
+          <th>Perguruan Tinggi</th>
+          <th>Alamat</th>
+          <th>Nagari </th>
+          <th>Kecamatan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        $ambil = (mysql_query("SELECT * FROM calonbeasiswa"));
+        while ($sql = mysql_fetch_array($ambil)) {
+          // var_dump($sql);
+        ?>
+          <tr>
+            <td><?php echo ++$no ?></td>
+            <td><?php echo $sql['nik_mhs'] ?></td>
+            <td><?php echo $sql['nama_mhs'] ?></td>
+            <td><?php echo $sql['jenis_kelamin'] ?></td>
+            <td><?php echo $sql['tempat_lahir'] . " / " . $sql['tanggal_lahir'] ?></td>
+            <td><?php echo $sql['perguruan_tinggi'] ?></td>
+            <td><?php echo $sql['alamat'] ?></td>
+            <td><?php echo $sql['nagari'] ?></td>
+            <td><?php echo $sql['kecamatan'] ?></td>
+          </tr>
+        <?php } ?>
+      </tbody>
+    </table>
 
-<?php
-//Batas file sampe sini
-$html = ob_get_contents(); //Proses untuk mengambil hasil dari OB..
-ob_end_clean();
-//$stylesheet = file_get_contents('css/zebra.css');
-//Here convert the encode for UTF-8, if you prefer the ISO-8859-1 just change for $mpdf->WriteHTML($html);
-$mpdf->WriteHTML($stylesheet,1);
-$mpdf->WriteHTML(utf8_encode($html));
-$mpdf->Output($nama_dokumen.".pdf" ,'I');
-exit;
-?>
+    <br>
+    <br>
+    <br>
+
+    <p style="margin-left: 950px">
+      Pasaman Barat, <?php echo date('d-m-Y') ?><br>
+    </p>
+    <p style="margin-left: 1000px">
+      Pimpinan
+    </p>
+    <br>
+    <br>
+    <br>
+    <p style="margin-left: 1000px">
+      ...........................
+    </p>
+
+  </div>
+
+  <!-- <script>
+    window.print();
+  </script> -->
+</body>
+
+</html>
